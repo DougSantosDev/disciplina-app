@@ -1,50 +1,41 @@
-# Welcome to your Expo app 👋
+# Disciplina App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Mobile app built with Expo and React Native.
 
-## Get started
+## Requirements
 
-1. Install dependencies
+- Node.js (LTS)
+- npm
 
-   ```bash
-   npm install
-   ```
+## Setup
 
-2. Start the app
+```bash
+npm install
+```
 
-   ```bash
-   npx expo start
-   ```
+## Run
 
-In the output, you'll find options to open the app in a
+```bash
+npm run start
+```
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+Other commands:
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+```bash
+npm run android
+npm run ios
+npm run web
+```
 
-## Get a fresh project
+## Project structure
 
-When you're ready, run:
+- `app/`: routes and screens (Expo Router)
+- `components/`: shared UI components
+- `assets/`: images and fonts
+- `hooks/`, `constants/`: shared logic and values
+
+## Reset the starter template
 
 ```bash
 npm run reset-project
 ```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
