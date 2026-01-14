@@ -27,6 +27,7 @@ const timePattern = /^\d{2}:\d{2}$/;
 export default function AddTaskScreen() {
   const { addTask, updateTask } = useTasks();
   const { settings } = useSettings();
+  // Data padrao para novas tarefas.
   const todayKey = useMemo(() => getDateKey(new Date()), []);
 
   const [title, setTitle] = useState('');
@@ -39,6 +40,7 @@ export default function AddTaskScreen() {
   const [error, setError] = useState('');
   const [saving, setSaving] = useState(false);
 
+  // Valida e salva a tarefa, agendando lembrete se estiver ativo.
   const handleSave = async () => {
     const trimmedTitle = title.trim();
     if (!trimmedTitle) {
@@ -66,6 +68,7 @@ export default function AddTaskScreen() {
       repeat,
     });
 
+    // Agenda notificacao local quando habilitado.
     if (settings.reminderEnabled) {
       const notificationId = await scheduleTaskReminder(
         createdTask,

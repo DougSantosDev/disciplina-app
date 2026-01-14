@@ -10,6 +10,7 @@ import { getDateKey } from '@/utils/dates';
 export default function OverdueScreen() {
   const { tasks, toggleTask } = useTasks();
   const todayKey = getDateKey(new Date());
+  // Filtra tarefas pendentes com data anterior a hoje.
   const overdueTasks = tasks.filter((task) => task.status === 'pending' && task.dueDate < todayKey);
 
   return (

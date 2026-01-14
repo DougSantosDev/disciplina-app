@@ -4,6 +4,7 @@ import { loadTasks, saveTasks } from '@/storage/tasksStorage';
 import { parseDateKey } from '@/utils/dates';
 import { cancelNotification } from '@/utils/notifications';
 
+// Opcoes fixas usadas nos filtros e seletores.
 export const CATEGORY_OPTIONS = [
   { id: 'work', label: 'Trabalho', color: '#D96C55' },
   { id: 'school', label: 'Faculdade', color: '#2A9D8F' },
@@ -23,13 +24,16 @@ export const REPEAT_OPTIONS = [
   { id: 'weekly', label: 'Semanal' },
 ];
 
+// Contexto central de tarefas (CRUD + persistencia).
 const TasksContext = createContext(null);
 
+// Gera um id simples para tarefas locais.
 function createId() {
   const seed = Math.random().toString(36).slice(2, 8);
   return `${Date.now().toString(36)}-${seed}`;
 }
 
+// Pontua prioridade para ordenar tarefas.
 function getPriorityScore(priority) {
   if (priority === 'high') {
     return 3;
@@ -40,6 +44,7 @@ function getPriorityScore(priority) {
   return 1;
 }
 
+// Converte data/hora da tarefa em timestamp para ordenacao.
 function getTaskTimestamp(task) {
   const base = parseDateKey(task.dueDate);
   if (task.dueTime) {
@@ -51,6 +56,7 @@ function getTaskTimestamp(task) {
   return base.getTime();
 }
 
+// Ordena: pendentes primeiro, depois por horario e prioridade.
 function sortTasks(tasks) {
   return [...tasks].sort((a, b) => {
     if (a.status !== b.status) {
@@ -64,6 +70,7 @@ function sortTasks(tasks) {
   });
 }
 
+// Helpers para metadados usados na UI.
 export function getCategoryMeta(category) {
   return CATEGORY_OPTIONS.find((option) => option.id === category) ?? CATEGORY_OPTIONS[0];
 }
@@ -76,6 +83,7 @@ export function getRepeatMeta(repeat) {
   return REPEAT_OPTIONS.find((option) => option.id === repeat) ?? REPEAT_OPTIONS[0];
 }
 
+// Normaliza dados e cria uma tarefa persistivel.
 function createTask(draft) {
   const now = new Date();
   return {
@@ -93,10 +101,12 @@ function createTask(draft) {
   };
 }
 
+// Provider com carga inicial do storage e operacoes CRUD.
 export function TasksProvider({ children }) {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Persistencia com atualizacao em memoria e AsyncStorage.
   const persist = useCallback((updater) => {
     setTasks((current) => {
       const next = typeof updater === 'function' ? updater(current) : updater;
@@ -105,6 +115,7 @@ export function TasksProvider({ children }) {
     });
   }, []);
 
+  // Recarrega tarefas do storage.
   const refresh = useCallback(async () => {
     setLoading(true);
     const stored = await loadTasks();
@@ -116,6 +127,7 @@ export function TasksProvider({ children }) {
     void refresh();
   }, [refresh]);
 
+  // Adiciona tarefa e devolve o objeto criado.
   const addTask = useCallback(
     async (draft) => {
       const task = createTask(draft);
@@ -125,6 +137,7 @@ export function TasksProvider({ children }) {
     [persist],
   );
 
+  // Alterna status; se concluir, cancela notificacao agendada.
   const toggleTask = useCallback(
     async (id) => {
       persist((current) =>
@@ -146,6 +159,7 @@ export function TasksProvider({ children }) {
     [persist],
   );
 
+  // Atualiza propriedades mantendo ordenacao.
   const updateTask = useCallback(
     async (id, patch) => {
       persist((current) =>
@@ -155,6 +169,7 @@ export function TasksProvider({ children }) {
     [persist],
   );
 
+  // Remove tarefa e cancela notificacao ligada.
   const removeTask = useCallback(
     async (id) => {
       persist((current) => {
@@ -176,6 +191,7 @@ export function TasksProvider({ children }) {
   return <TasksContext.Provider value={value}>{children}</TasksContext.Provider>;
 }
 
+// Hook de consumo do contexto.
 export function useTasks() {
   const context = useContext(TasksContext);
   if (!context) {

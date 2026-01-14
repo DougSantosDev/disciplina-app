@@ -20,10 +20,12 @@ export default function SettingsScreen() {
   const [summaryTime, setSummaryTime] = useState(settings.summaryTime);
   const [error, setError] = useState('');
 
+  // Mantem o input sincronizado com o estado salvo.
   useEffect(() => {
     setSummaryTime(settings.summaryTime);
   }, [settings.summaryTime]);
 
+  // Liga/desliga lembretes e sincroniza notificacoes pendentes.
   const handleReminderToggle = async (value) => {
     if (!notificationsSupported) {
       setError('Notificacoes exigem development build.');
@@ -63,6 +65,7 @@ export default function SettingsScreen() {
     }
   };
 
+  // Liga/desliga o resumo diario e (re)agenda notificacao.
   const handleSummaryToggle = async (value) => {
     if (!notificationsSupported) {
       setError('Notificacoes exigem development build.');
@@ -88,6 +91,7 @@ export default function SettingsScreen() {
     updateSettings({ summaryEnabled: false, summaryNotificationId: null });
   };
 
+  // Valida horario e reprograma o resumo quando ativo.
   const handleSummaryTimeEnd = async () => {
     if (!notificationsSupported) {
       setError('Notificacoes exigem development build.');

@@ -1,7 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// Chave de armazenamento das configuracoes no AsyncStorage.
 const STORAGE_KEY = 'disciplina.settings.v1';
 
+// Valores padrao usados quando ainda nao existe configuracao salva.
 export const DEFAULT_SETTINGS = {
   reminderEnabled: true,
   reminderMinutes: 15,
@@ -10,6 +12,7 @@ export const DEFAULT_SETTINGS = {
   summaryNotificationId: null,
 };
 
+// Carrega configuracoes salvas e mescla com os valores padrao.
 export async function loadSettings() {
   try {
     const raw = await AsyncStorage.getItem(STORAGE_KEY);
@@ -23,6 +26,7 @@ export async function loadSettings() {
   }
 }
 
+// Salva o snapshot atual das configuracoes.
 export async function saveSettings(settings) {
   await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
 }

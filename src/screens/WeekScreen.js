@@ -11,6 +11,7 @@ export default function WeekScreen() {
   const { tasks, toggleTask } = useTasks();
   const today = new Date();
   const todayKey = getDateKey(today);
+  // Calcula a semana atual (segunda a domingo).
   const weekStart = startOfWeek(today);
   const days = Array.from({ length: 7 }, (_, index) => addDays(weekStart, index));
 
@@ -33,6 +34,7 @@ export default function WeekScreen() {
 
         {days.map((day) => {
           const dayKey = getDateKey(day);
+          // Filtra tarefas da data para renderizar o bloco.
           const dayTasks = tasks.filter((task) => task.dueDate === dayKey);
           const isToday = dayKey === todayKey;
 

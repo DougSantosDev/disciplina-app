@@ -3,6 +3,7 @@ import { Platform } from 'react-native';
 
 import { parseDateKey } from '@/utils/dates';
 
+// Expo Go nao suporta notificacoes completas; web tambem nao.
 const appOwnership = Constants.appOwnership ?? 'unknown';
 const platformSupported = Platform.OS !== 'web';
 export const notificationsSupported = platformSupported && appOwnership !== 'expo';
@@ -11,6 +12,7 @@ let notificationsPromise = null;
 let handlerConfigured = false;
 let channelConfigured = false;
 
+// Importa o modulo apenas quando suportado.
 async function getNotificationsModule() {
   if (!notificationsSupported) {
     return null;
@@ -21,6 +23,7 @@ async function getNotificationsModule() {
   return notificationsPromise;
 }
 
+// Garante handler padrao e canal no Android.
 async function ensureConfigured() {
   const Notifications = await getNotificationsModule();
   if (!Notifications) {
@@ -48,6 +51,7 @@ async function ensureConfigured() {
   return Notifications;
 }
 
+// Solicita permissao ao usuario se necessario.
 export async function ensureNotificationPermissions() {
   const Notifications = await getNotificationsModule();
   if (!Notifications) {
@@ -61,6 +65,7 @@ export async function ensureNotificationPermissions() {
   return requested.status === 'granted';
 }
 
+// Valida horario HH:MM para o resumo diario.
 function parseTime(value) {
   const match = value.match(/^(\d{2}):(\d{2})$/);
   if (!match) {
@@ -74,6 +79,7 @@ function parseTime(value) {
   return { hour, minute };
 }
 
+// Calcula o horario de disparo para um lembrete.
 function buildTriggerDate(task, minutesBefore) {
   const base = parseDateKey(task.dueDate);
   let hours = 9;
@@ -92,6 +98,7 @@ function buildTriggerDate(task, minutesBefore) {
   return triggerTime;
 }
 
+// Agenda lembrete unico para uma tarefa.
 export async function scheduleTaskReminder(task, minutesBefore) {
   const Notifications = await ensureConfigured();
   if (!Notifications) {
@@ -118,6 +125,7 @@ export async function scheduleTaskReminder(task, minutesBefore) {
   });
 }
 
+// Agenda resumo diario recorrente.
 export async function scheduleDailySummary(summaryTime) {
   const Notifications = await ensureConfigured();
   if (!Notifications) {
@@ -146,6 +154,7 @@ export async function scheduleDailySummary(summaryTime) {
   });
 }
 
+// Cancela uma notificacao ja agendada.
 export async function cancelNotification(notificationId) {
   if (!notificationId) {
     return;

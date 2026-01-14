@@ -7,8 +7,10 @@ import TaskCard from '@/components/TaskCard';
 import { useTasks } from '@/context/TasksContext';
 import { formatFullDate, getDateKey, parseDateKey } from '@/utils/dates';
 
+// Peso usado para ordenar prioridades no top 3.
 const priorityRank = { high: 3, medium: 2, low: 1 };
 
+// Converte data/hora da tarefa em timestamp para ordenacao.
 function getTaskTime(task) {
   const base = parseDateKey(task.dueDate);
   if (task.dueTime) {
@@ -25,12 +27,14 @@ export default function TodayScreen() {
   const today = new Date();
   const todayKey = getDateKey(today);
 
+  // Tarefas do dia e pendencias para o painel principal.
   const todayTasks = tasks.filter((task) => task.dueDate === todayKey);
   const pendingToday = todayTasks.filter((task) => task.status === 'pending');
   const overdueTasks = tasks.filter(
     (task) => task.status === 'pending' && task.dueDate < todayKey,
   );
 
+  // Top 3 por prioridade e horario.
   const topThree = [...pendingToday]
     .sort((a, b) => {
       const priorityDiff = priorityRank[b.priority] - priorityRank[a.priority];

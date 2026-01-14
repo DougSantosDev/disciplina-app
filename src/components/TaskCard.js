@@ -5,6 +5,7 @@ import { Fonts } from '@/constants/theme';
 import { getCategoryMeta, getPriorityMeta } from '@/context/TasksContext';
 import { formatShortDate, formatTimeLabel, parseDateKey } from '@/utils/dates';
 
+// Card compacto de tarefa com status e metadados.
 export default function TaskCard({ task, onToggle }) {
   const category = getCategoryMeta(task.category);
   const priority = getPriorityMeta(task.priority);
