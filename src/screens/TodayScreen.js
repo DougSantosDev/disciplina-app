@@ -3,9 +3,9 @@ import { Link } from 'expo-router';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { Fonts } from '@/constants/theme';
-import TaskCard from '@/src/components/TaskCard';
-import { useTasks } from '@/src/context/TasksContext';
-import { formatFullDate, getDateKey, parseDateKey } from '@/src/utils/dates';
+import TaskCard from '@/components/TaskCard';
+import { useTasks } from '@/context/TasksContext';
+import { formatFullDate, getDateKey, parseDateKey } from '@/utils/dates';
 
 const priorityRank = { high: 3, medium: 2, low: 1 };
 

@@ -1,4 +1,4 @@
-import OverdueScreen from '@/src/screens/OverdueScreen';
+import OverdueScreen from '@/screens/OverdueScreen';
 
 export default function Screen() {
   return <OverdueScreen />;

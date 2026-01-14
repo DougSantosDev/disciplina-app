@@ -12,15 +12,15 @@ import {
 } from 'react-native';
 
 import { Fonts } from '@/constants/theme';
-import { useSettings } from '@/src/context/SettingsContext';
+import { useSettings } from '@/context/SettingsContext';
 import {
   CATEGORY_OPTIONS,
   PRIORITY_OPTIONS,
   REPEAT_OPTIONS,
   useTasks,
-} from '@/src/context/TasksContext';
-import { getDateKey, isValidDateKey } from '@/src/utils/dates';
-import { scheduleTaskReminder } from '@/src/utils/notifications';
+} from '@/context/TasksContext';
+import { getDateKey, isValidDateKey } from '@/utils/dates';
+import { scheduleTaskReminder } from '@/utils/notifications';
 
 const timePattern = /^\d{2}:\d{2}$/;
 

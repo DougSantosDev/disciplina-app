@@ -1,7 +1,7 @@
 import Constants from 'expo-constants';
 import { Platform } from 'react-native';
 
-import { parseDateKey } from '@/src/utils/dates';
+import { parseDateKey } from '@/utils/dates';
 
 const appOwnership = Constants.appOwnership ?? 'unknown';
 const platformSupported = Platform.OS !== 'web';

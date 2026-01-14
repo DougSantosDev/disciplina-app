@@ -2,8 +2,8 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { Fonts } from '@/constants/theme';
-import { getCategoryMeta, getPriorityMeta } from '@/src/context/TasksContext';
-import { formatShortDate, formatTimeLabel, parseDateKey } from '@/src/utils/dates';
+import { getCategoryMeta, getPriorityMeta } from '@/context/TasksContext';
+import { formatShortDate, formatTimeLabel, parseDateKey } from '@/utils/dates';
 
 export default function TaskCard({ task, onToggle }) {
   const category = getCategoryMeta(task.category);

@@ -1,8 +1,8 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
-import { loadTasks, saveTasks } from '@/src/storage/tasksStorage';
-import { parseDateKey } from '@/src/utils/dates';
-import { cancelNotification } from '@/src/utils/notifications';
+import { loadTasks, saveTasks } from '@/storage/tasksStorage';
+import { parseDateKey } from '@/utils/dates';
+import { cancelNotification } from '@/utils/notifications';
 
 export const CATEGORY_OPTIONS = [
   { id: 'work', label: 'Trabalho', color: '#D96C55' },

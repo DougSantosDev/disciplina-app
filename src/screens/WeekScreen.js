@@ -3,9 +3,9 @@ import { Link } from 'expo-router';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { Fonts } from '@/constants/theme';
-import TaskCard from '@/src/components/TaskCard';
-import { useTasks } from '@/src/context/TasksContext';
-import { addDays, formatShortDate, formatWeekday, getDateKey, startOfWeek } from '@/src/utils/dates';
+import TaskCard from '@/components/TaskCard';
+import { useTasks } from '@/context/TasksContext';
+import { addDays, formatShortDate, formatWeekday, getDateKey, startOfWeek } from '@/utils/dates';
 
 export default function WeekScreen() {
   const { tasks, toggleTask } = useTasks();

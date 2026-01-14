@@ -3,9 +3,9 @@ import { Link } from 'expo-router';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { Fonts } from '@/constants/theme';
-import TaskCard from '@/src/components/TaskCard';
-import { useTasks } from '@/src/context/TasksContext';
-import { getDateKey } from '@/src/utils/dates';
+import TaskCard from '@/components/TaskCard';
+import { useTasks } from '@/context/TasksContext';
+import { getDateKey } from '@/utils/dates';
 
 export default function OverdueScreen() {
   const { tasks, toggleTask } = useTasks();

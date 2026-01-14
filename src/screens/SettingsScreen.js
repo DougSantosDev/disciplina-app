@@ -2,15 +2,15 @@ import { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Switch, Text, TextInput, View } from 'react-native';
 
 import { Fonts } from '@/constants/theme';
-import { useSettings } from '@/src/context/SettingsContext';
-import { useTasks } from '@/src/context/TasksContext';
-import { getDateKey } from '@/src/utils/dates';
+import { useSettings } from '@/context/SettingsContext';
+import { useTasks } from '@/context/TasksContext';
+import { getDateKey } from '@/utils/dates';
 import {
   cancelNotification,
   notificationsSupported,
   scheduleDailySummary,
   scheduleTaskReminder,
-} from '@/src/utils/notifications';
+} from '@/utils/notifications';
 
 const timePattern = /^\d{2}:\d{2}$/;
 

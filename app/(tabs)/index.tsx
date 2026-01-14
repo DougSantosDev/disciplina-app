@@ -1,4 +1,4 @@
-import TodayScreen from '@/src/screens/TodayScreen';
+import TodayScreen from '@/screens/TodayScreen';
 
 export default function Screen() {
   return <TodayScreen />;

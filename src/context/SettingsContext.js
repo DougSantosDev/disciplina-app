@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
-import { DEFAULT_SETTINGS, loadSettings, saveSettings } from '@/src/storage/settingsStorage';
+import { DEFAULT_SETTINGS, loadSettings, saveSettings } from '@/storage/settingsStorage';
 
 const SettingsContext = createContext(null);
 
