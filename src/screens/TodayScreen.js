@@ -1,9 +1,11 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Link } from 'expo-router';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useCallback, useState } from 'react';
+import { Pressable, RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { Fonts } from '@/constants/theme';
 import TaskCard from '@/components/TaskCard';
+import { IconSymbol } from '@/components/ui/icon-symbol';
 import { useTasks } from '@/context/TasksContext';
 import { formatFullDate, getDateKey, parseDateKey } from '@/utils/dates';
 
@@ -23,7 +25,8 @@ function getTaskTime(task) {
 }
 
 export default function TodayScreen() {
-  const { tasks, toggleTask, loading } = useTasks();
+  const { tasks, toggleTask, loading, refresh } = useTasks();
+  const [refreshing, setRefreshing] = useState(false);
   const today = new Date();
   const todayKey = getDateKey(today);
 
@@ -45,23 +48,39 @@ export default function TodayScreen() {
     })
     .slice(0, 3);
 
+  const handleRefresh = useCallback(async () => {
+    setRefreshing(true);
+    await refresh();
+    setRefreshing(false);
+  }, [refresh]);
+
   return (
     <View style={styles.page}>
       <View style={styles.glowTop} />
       <View style={styles.glowBottom} />
-      <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        contentContainerStyle={styles.scroll}
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor="#C44536" />
+        }>
         <View style={styles.headerRow}>
           <View>
             <Text style={styles.kicker}>Seu foco hoje</Text>
             <Text style={styles.title}>Disciplina</Text>
             <Text style={styles.date}>{formatFullDate(today)}</Text>
           </View>
-          <Link href="/adicionar" asChild>
-            <Pressable style={styles.addButton}>
-              <MaterialIcons name="add" size={22} color="#1F2933" />
-              <Text style={styles.addLabel}>Nova</Text>
+          <View style={styles.actionRow}>
+            <Pressable style={styles.refreshButton} onPress={handleRefresh}>
+              <IconSymbol size={20} name="arrow.clockwise" color="#1F2933" />
             </Pressable>
-          </Link>
+            <Link href="/adicionar" asChild>
+              <Pressable style={styles.addButton}>
+                <MaterialIcons name="add" size={22} color="#1F2933" />
+                <Text style={styles.addLabel}>Nova</Text>
+              </Pressable>
+            </Link>
+          </View>
         </View>
 
         <View style={styles.section}>
@@ -152,6 +171,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'flex-start',
   },
+  actionRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
   kicker: {
     fontFamily: Fonts.sans,
     fontSize: 13,
@@ -179,6 +203,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 8,
     borderRadius: 999,
+    borderWidth: 1,
+    borderColor: '#E6D5C1',
+  },
+  refreshButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FCEFD8',
     borderWidth: 1,
     borderColor: '#E6D5C1',
   },

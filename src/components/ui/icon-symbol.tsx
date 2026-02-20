@@ -21,6 +21,8 @@ const MAPPING = {
   'list.bullet.rectangle': 'view-list',
   calendar: 'event',
   'exclamationmark.triangle.fill': 'warning',
+  'plus.circle.fill': 'add-circle',
+  'arrow.clockwise': 'refresh',
   'gearshape.fill': 'settings',
 } as IconMapping;
 
