@@ -12,7 +12,7 @@ export async function loadTasks() {
     }
     const parsed = JSON.parse(raw);
     return Array.isArray(parsed) ? parsed : [];
-  } catch (error) {
+  } catch (_error) {
     return [];
   }
 }

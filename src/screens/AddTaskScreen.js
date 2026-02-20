@@ -40,6 +40,10 @@ export default function AddTaskScreen() {
   const [error, setError] = useState('');
   const [saving, setSaving] = useState(false);
 
+  const handleClose = () => {
+    router.replace('/');
+  };
+
   // Valida e salva a tarefa, agendando lembrete se estiver ativo.
   const handleSave = async () => {
     const trimmedTitle = title.trim();
@@ -80,7 +84,7 @@ export default function AddTaskScreen() {
     }
 
     setSaving(false);
-    router.back();
+    handleClose();
   };
 
   return (
@@ -197,7 +201,7 @@ export default function AddTaskScreen() {
         {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
         <View style={styles.actions}>
-          <Pressable onPress={() => router.back()} style={[styles.actionButton, styles.secondary]}>
+          <Pressable onPress={handleClose} style={[styles.actionButton, styles.secondary]}>
             <Text style={styles.secondaryText}>Cancelar</Text>
           </Pressable>
           <Pressable

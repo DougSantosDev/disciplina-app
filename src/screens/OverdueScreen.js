@@ -23,7 +23,7 @@ export default function OverdueScreen() {
             <Text style={styles.title}>Atrasadas</Text>
             <Text style={styles.subtitle}>{overdueTasks.length} pendentes</Text>
           </View>
-          <Link href="/modal" asChild>
+          <Link href="/adicionar" asChild>
             <Pressable style={styles.addButton}>
               <MaterialIcons name="add" size={22} color="#1F2933" />
               <Text style={styles.addLabel}>Nova</Text>

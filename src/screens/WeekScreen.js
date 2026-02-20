@@ -24,7 +24,7 @@ export default function WeekScreen() {
             <Text style={styles.kicker}>Planejamento</Text>
             <Text style={styles.title}>Semana</Text>
           </View>
-          <Link href="/modal" asChild>
+          <Link href="/adicionar" asChild>
             <Pressable style={styles.addButton}>
               <MaterialIcons name="add" size={22} color="#1F2933" />
               <Text style={styles.addLabel}>Nova</Text>

@@ -56,7 +56,7 @@ export default function TodayScreen() {
             <Text style={styles.title}>Disciplina</Text>
             <Text style={styles.date}>{formatFullDate(today)}</Text>
           </View>
-          <Link href="/modal" asChild>
+          <Link href="/adicionar" asChild>
             <Pressable style={styles.addButton}>
               <MaterialIcons name="add" size={22} color="#1F2933" />
               <Text style={styles.addLabel}>Nova</Text>

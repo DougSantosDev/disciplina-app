@@ -1,5 +1,5 @@
 import AddTaskScreen from '@/screens/AddTaskScreen';
 
-export default function ModalScreen() {
+export default function Screen() {
   return <AddTaskScreen />;
 }

@@ -21,7 +21,7 @@ export async function loadSettings() {
     }
     const parsed = JSON.parse(raw);
     return { ...DEFAULT_SETTINGS, ...parsed };
-  } catch (error) {
+  } catch (_error) {
     return DEFAULT_SETTINGS;
   }
 }
